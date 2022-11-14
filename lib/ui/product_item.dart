@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db_operations/db_product_operations.dart';
+import 'package:ginger_shop/db_operations/product_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductItem extends StatefulWidget {
@@ -14,7 +14,7 @@ class ProductItem extends StatefulWidget {
       required this.isFavourite,
       required this.id,
       required this.documentSnapshot,
-      this.isAdmin = true})
+      this.isAdmin = false})
       : super(key: key);
 
   final String brand;

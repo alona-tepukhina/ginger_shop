@@ -50,4 +50,9 @@ class UserDao extends ChangeNotifier {
     }
     return null;
   }
+
+  Future<void> logout() async {
+    await auth.signOut();
+    notifyListeners();
+  }
 }

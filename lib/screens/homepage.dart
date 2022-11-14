@@ -1,32 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ginger_shop/add_product.dart';
-import 'package:ginger_shop/product_item.dart';
+import 'package:ginger_shop/screens/add_product.dart';
+import 'package:ginger_shop/ui/product_item.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db_operations/user_dao.dart';
+import 'package:ginger_shop/ui/main_menu.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final userDao = Provider.of<UserDao>(context, listen: false);
+    bool isAdmin = userDao.isLoggedIn();
+
     return Scaffold(
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text('Home'),
-                onTap: () => Navigator.of(context).pushNamed('/home'),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Add product'),
-                onTap: () => Navigator.of(context).pushNamed('/addProduct'),
-              ),
-            ],
-          ),
+          child: MainMenu(isAdmin: isAdmin),
         ),
       ),
       appBar: AppBar(
