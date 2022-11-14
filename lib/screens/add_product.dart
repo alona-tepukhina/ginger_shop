@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db_operations/user_dao.dart';
+import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/utilities/validators.dart';
-
-import '../db_operations/product_dao.dart';
+import 'package:ginger_shop/db/product_dao.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);

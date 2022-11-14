@@ -3,8 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ginger_shop/screens/add_product.dart';
 import 'package:ginger_shop/ui/product_item.dart';
 import 'package:provider/provider.dart';
-import 'package:ginger_shop/db_operations/user_dao.dart';
+import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/ui/main_menu.dart';
+import 'package:ginger_shop/db/db_product.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class HomePage extends StatelessWidget {
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot data = snapshot.data!.docs[index];
-                    return ProductItem(
+                    final product = DBProduct(
                         brand: data['brand'],
                         productName: data['productName'],
                         productPrice: data['price'],
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
                         isFavourite: data['isFavourite'],
                         id: data.id,
                         documentSnapshot: data);
+                    return ProductItem(product: product);
                   });
         },
       ),
