@@ -6,6 +6,7 @@ import 'package:ginger_shop/db_operations/user_dao.dart';
 import 'package:ginger_shop/screens/login_screen.dart';
 import 'package:ginger_shop/screens/add_product.dart';
 import 'package:ginger_shop/screens/admin_page.dart';
+import 'package:ginger_shop/screens/favourites_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/home': (context) => const HomePage(),
+          '/favourites': (context) => const FavouritesPage(),
           '/login': (context) => const LoginScreen(),
           '/admin': (context) => const AdminPage(),
           '/addProduct': (context) => const AddProduct(),

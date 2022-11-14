@@ -18,6 +18,11 @@ class MainMenu extends StatelessWidget {
       ),
       const Divider(),
       ListTile(
+        title: const Text('Favourites'),
+        onTap: () => Navigator.of(context).pushNamed('/favourites'),
+      ),
+      const Divider(),
+      ListTile(
         title: const Text('Login'),
         onTap: () => Navigator.of(context).pushNamed('/login'),
       ),

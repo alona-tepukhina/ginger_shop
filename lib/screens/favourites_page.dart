@@ -6,29 +6,32 @@ import 'package:provider/provider.dart';
 import 'package:ginger_shop/db_operations/user_dao.dart';
 import 'package:ginger_shop/ui/main_menu.dart';
 
-class AdminPage extends StatelessWidget {
-  const AdminPage({Key? key}) : super(key: key);
+class FavouritesPage extends StatelessWidget {
+  const FavouritesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final productsRef = FirebaseFirestore.instance.collection('products');
+    final query = productsRef.where("isFavourite", isEqualTo: true);
+
     return Scaffold(
       drawer: const Drawer(
         child: Padding(
           padding: EdgeInsets.all(8.0),
-          child: MainMenu(
-            isAdmin: true,
-          ),
+          child: MainMenu(),
         ),
       ),
       appBar: AppBar(
-        title: const Text('Edit product list'),
+        title: const Text('Favourite products'),
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('products').snapshots(),
+        //stream: FirebaseFirestore.instance.collection('products').snapshots(),
+        stream: query.snapshots(),
         builder: (context, snapshot) {
           return (!snapshot.hasData)
-              ? const Center(child: CircularProgressIndicator())
+              //? const Center(child: CircularProgressIndicator())
+              ? const Text('List of favourite products is empty')
               : ListView.builder(
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (context, index) {
@@ -42,7 +45,6 @@ class AdminPage extends StatelessWidget {
                       isFavourite: data['isFavourite'],
                       id: data.id,
                       documentSnapshot: data,
-                      isAdmin: true,
                     );
                   });
         },
