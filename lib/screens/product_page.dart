@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/ui/product_item.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db/db_product.dart';
+import 'package:ginger_shop/db/product.dart';
 import 'package:ginger_shop/db/product_dao.dart';
+import 'package:provider/provider.dart';
+import 'package:ginger_shop/db/cart_model.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key, required this.product}) : super(key: key);
 
-  final DBProduct product;
+  final Product product;
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -16,7 +18,17 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
-    Icon favouritesIcon = (widget.product.isFavourite)
+    // Icon favouritesIcon = (widget.product.isFavourite)
+    //     ? const Icon(Icons.favorite)
+    //     : const Icon(Icons.favorite_outline_outlined);
+
+    // not sure about updating cart icon in Appbar, that's why context.read
+    //final cart = context.watch<CartModel>();
+    final cart = context.read<CartModel>();
+
+    bool isFavouriteProduct = widget.product.isFavourite;
+
+    Icon favouritesIcon = (isFavouriteProduct)
         ? const Icon(Icons.favorite)
         : const Icon(Icons.favorite_outline_outlined);
 
@@ -52,6 +64,9 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           iconSize: 18,
                           onPressed: () {
+                            // setState(() {
+                            //   isFavouriteProduct = !isFavouriteProduct;
+                            // });
                             editProduct(
                                 widget.product.isFavourite, widget.product.id);
                           },
@@ -83,6 +98,30 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
                     kSizedBoxHalfHeight,
+                    Text(
+                      'Price: ${widget.product.productPrice} USD',
+                      style: const TextStyle(
+                          //fontSize: 12.0,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    kSizedBoxHalfHeight,
+                    const Divider(),
+                    kSizedBoxHalfHeight,
+                    Row(
+                      children: [
+                        // TODO: Add number picker here
+                        ElevatedButton(
+                          onPressed: () {
+                            cart.add(widget.product);
+                          },
+                          child: const Text('Add to cart'),
+                        ),
+                      ],
+                    ),
+                    kSizedBoxHalfHeight,
+                    Divider(),
+                    kSizedBoxHalfHeight,
                     const Text(
                       'Description: ',
                       style: TextStyle(fontWeight: FontWeight.w500),
@@ -95,19 +134,6 @@ class _ProductPageState extends State<ProductPage> {
                         color: Colors.black54,
                       ),
                     ),
-                    kSizedBoxHalfHeight,
-                    Text(
-                      'Price: ${widget.product.productPrice} USD',
-                      style: const TextStyle(
-                          //fontSize: 12.0,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    // kSizedBoxHalfHeight,
-                    // const Divider(),
-                    // kSizedBoxHalfHeight,
-                    // OutlinedButton(
-                    //     onPressed: () {}, child: Text('Add to favourites')),
                   ],
                 ),
               ],

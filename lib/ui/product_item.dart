@@ -3,7 +3,9 @@ import 'package:ginger_shop/screens/product_page.dart';
 import 'package:ginger_shop/utilities/constants.dart';
 import 'package:ginger_shop/db/product_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ginger_shop/db/db_product.dart';
+import 'package:ginger_shop/db/product.dart';
+import 'package:ginger_shop/db/cart_model.dart';
+import 'package:provider/provider.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem(
@@ -29,7 +31,7 @@ class ProductItem extends StatefulWidget {
   // final String id;
   // final DocumentSnapshot documentSnapshot;
 
-  final DBProduct product;
+  final Product product;
   final bool isAdmin;
 
   @override
@@ -40,6 +42,9 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
+
+    // Not sure
+    final cart = context.watch<CartModel>();
 
     return Card(
       child: Padding(
@@ -157,14 +162,26 @@ class _ProductItemState extends State<ProductItem> {
                             Icons.delete,
                             color: Colors.black54,
                           ))
-                      : IconButton(
-                          iconSize: 18,
-                          onPressed: () {
-                            editProduct(product.isFavourite, product.id);
-                          },
-                          icon: (product.isFavourite)
-                              ? const Icon(Icons.favorite)
-                              : const Icon(Icons.favorite_outline_outlined)),
+                      : Column(
+                          children: [
+                            IconButton(
+                              iconSize: 18,
+                              onPressed: () {
+                                cart.add(product);
+                              },
+                              icon: const Icon(Icons.shopping_cart_outlined),
+                            ),
+                            IconButton(
+                                iconSize: 18,
+                                onPressed: () {
+                                  editProduct(product.isFavourite, product.id);
+                                },
+                                icon: (product.isFavourite)
+                                    ? const Icon(Icons.favorite)
+                                    : const Icon(
+                                        Icons.favorite_outline_outlined)),
+                          ],
+                        ),
                 ),
               ],
             ),

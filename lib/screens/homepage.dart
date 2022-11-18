@@ -5,7 +5,9 @@ import 'package:ginger_shop/ui/product_item.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/ui/main_menu.dart';
-import 'package:ginger_shop/db/db_product.dart';
+import 'package:ginger_shop/db/product.dart';
+import 'package:ginger_shop/screens/cart_screen.dart';
+import 'package:ginger_shop/db/cart_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -13,6 +15,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userDao = Provider.of<UserDao>(context, listen: false);
+    //final cartModel = Provider.of<CartModel>(context, listen: false);
+
     bool isAdmin = userDao.isLoggedIn();
 
     return Scaffold(
@@ -23,8 +27,15 @@ class HomePage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        title: const Text('Products list'),
+        title: const Text('Products'),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              icon: const Icon(Icons.shopping_cart)),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('products').snapshots(),
@@ -35,7 +46,7 @@ class HomePage extends StatelessWidget {
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (context, index) {
                     DocumentSnapshot data = snapshot.data!.docs[index];
-                    final product = DBProduct(
+                    final product = Product(
                         brand: data['brand'],
                         productName: data['productName'],
                         productPrice: data['price'],
