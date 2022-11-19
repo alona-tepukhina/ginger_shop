@@ -149,7 +149,8 @@ class _ProductItemState extends State<ProductItem> {
                               onPressed: () {
                                 cart.add(product: product);
                               },
-                              icon: const Icon(Icons.shopping_cart_outlined),
+                              //icon: const Icon(Icons.shopping_cart_outlined),
+                              icon: kShoppingCartIcon,
                             ),
                             IconButton(
                                 iconSize: 18,

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/ui/main_menu.dart';
 import 'package:ginger_shop/db/product.dart';
+import 'package:ginger_shop/utilities/constants.dart';
 
 class FavouritesPage extends StatelessWidget {
   const FavouritesPage({Key? key}) : super(key: key);
@@ -25,6 +26,14 @@ class FavouritesPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Favourite products'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
+            icon: kShoppingCartIcon,
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         //stream: FirebaseFirestore.instance.collection('products').snapshots(),

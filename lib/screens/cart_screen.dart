@@ -23,13 +23,14 @@ class CartScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cart'),
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-              icon: const Icon(Icons.shopping_cart)),
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, '/cart');
+        //     },
+        //     icon: kShoppingCartIcon,
+        //   ),
+        // ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
