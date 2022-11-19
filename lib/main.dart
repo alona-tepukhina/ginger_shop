@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CartModel())
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           '/home': (context) => const HomePage(),
           '/favourites': (context) => const FavouritesPage(),

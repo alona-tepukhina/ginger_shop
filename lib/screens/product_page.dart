@@ -5,6 +5,7 @@ import 'package:ginger_shop/db/product.dart';
 import 'package:ginger_shop/db/product_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/cart_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key, required this.product}) : super(key: key);
@@ -50,10 +51,11 @@ class _ProductPageState extends State<ProductPage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-              icon: const Icon(Icons.shopping_cart)),
+            onPressed: () {
+              Navigator.pushNamed(context, '/cart');
+            },
+            icon: kShoppingCartIcon,
+          ),
         ],
       ),
       body: SafeArea(
@@ -120,7 +122,6 @@ class _ProductPageState extends State<ProductPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          // 'Price: ${widget.product.productPrice} USD',
                           'Price: $tmpPrice USD',
                           style: const TextStyle(
                               //fontSize: 12.0,
@@ -143,14 +144,9 @@ class _ProductPageState extends State<ProductPage> {
                                 color: Colors.black38,
                               ),
                             ),
-                            //Text('$numberOfProducts'),
                             Text('$tmpNumberOfProducts'),
                             IconButton(
                               onPressed: () {
-                                //numberOfProducts++;
-                                // cart.add(
-                                //     product: widget.product,
-                                //     numberOfProducts: numberOfProducts);
                                 cart.increaseTmpNumberOfProducts();
                               },
                               icon: const Icon(
