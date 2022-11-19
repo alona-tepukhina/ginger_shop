@@ -15,7 +15,7 @@ class _AddProductState extends State<AddProduct> {
   late String id;
   String? brand;
   String? productName;
-  double price = 0;
+  num price = 0;
   String? shortDescription;
   String? imageURL;
   bool isFavourite = false;
@@ -183,7 +183,7 @@ class _AddProductState extends State<AddProduct> {
                         await addProduct(
                             brand: _brandController.text,
                             productName: _productNameController.text,
-                            price: _priceController.text,
+                            price: double.parse(_priceController.text),
                             shortDescription: _shortDescriptionController.text,
                             imageURL: _imageURLController.text,
                             isFavourite: isFavourite);

@@ -22,9 +22,15 @@ class _ProductPageState extends State<ProductPage> {
     //     ? const Icon(Icons.favorite)
     //     : const Icon(Icons.favorite_outline_outlined);
 
-    // not sure about updating cart icon in Appbar, that's why context.read
-    //final cart = context.watch<CartModel>();
-    final cart = context.read<CartModel>();
+    final cart = context.watch<CartModel>();
+
+    final selectedProduct = widget.product;
+
+    int tmpNumberOfProducts = cart.tmpNumberOfProducts;
+
+    double tmpPrice = cart.getTmpPrice(selectedProduct);
+
+    double totalPrice = widget.product.productPrice;
 
     bool isFavouriteProduct = widget.product.isFavourite;
 
@@ -36,6 +42,19 @@ class _ProductPageState extends State<ProductPage> {
       appBar: AppBar(
         title: Text(widget.product.productName),
         centerTitle: true,
+        leading: BackButton(
+          onPressed: () {
+            cart.setDefaultTmpNumberOfProducts();
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              icon: const Icon(Icons.shopping_cart)),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -64,9 +83,6 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           iconSize: 18,
                           onPressed: () {
-                            // setState(() {
-                            //   isFavouriteProduct = !isFavouriteProduct;
-                            // });
                             editProduct(
                                 widget.product.isFavourite, widget.product.id);
                           },
@@ -98,29 +114,69 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
                     kSizedBoxHalfHeight,
-                    Text(
-                      'Price: ${widget.product.productPrice} USD',
-                      style: const TextStyle(
-                          //fontSize: 12.0,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    kSizedBoxHalfHeight,
                     const Divider(),
                     kSizedBoxHalfHeight,
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        // TODO: Add number picker here
+                        Text(
+                          // 'Price: ${widget.product.productPrice} USD',
+                          'Price: $tmpPrice USD',
+                          style: const TextStyle(
+                              //fontSize: 12.0,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          width: 24,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                cart.decreaseTmpNumberOfProducts();
+                              },
+                              icon: const Icon(
+                                Icons.remove_circle_outline,
+                                size: 20,
+                                color: Colors.black38,
+                              ),
+                            ),
+                            //Text('$numberOfProducts'),
+                            Text('$tmpNumberOfProducts'),
+                            IconButton(
+                              onPressed: () {
+                                //numberOfProducts++;
+                                // cart.add(
+                                //     product: widget.product,
+                                //     numberOfProducts: numberOfProducts);
+                                cart.increaseTmpNumberOfProducts();
+                              },
+                              icon: const Icon(
+                                Icons.add_circle_outline,
+                                size: 20,
+                                color: Colors.black38,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
                         ElevatedButton(
                           onPressed: () {
-                            cart.add(widget.product);
+                            cart.add(
+                                product: widget.product,
+                                numberOfProducts: tmpNumberOfProducts);
+                            cart.setDefaultTmpNumberOfProducts();
                           },
                           child: const Text('Add to cart'),
                         ),
                       ],
                     ),
                     kSizedBoxHalfHeight,
-                    Divider(),
+                    const Divider(),
                     kSizedBoxHalfHeight,
                     const Text(
                       'Description: ',

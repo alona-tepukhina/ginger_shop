@@ -15,8 +15,7 @@ class Product {
 
   final String brand;
   final String productName;
-  final String
-      productPrice; //TODO: change to double in database and everywhere in code
+  final double productPrice; // num in database
   final String imageUrl;
   final String shortDescription;
   final bool isFavourite;

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Future<void> addProduct({
   required String brand,
   required String productName,
-  String? price,
+  double? price,
   String? shortDescription,
   String? imageURL,
   bool isFavourite = false,

@@ -8,28 +8,8 @@ import 'package:ginger_shop/db/cart_model.dart';
 import 'package:provider/provider.dart';
 
 class ProductItem extends StatefulWidget {
-  const ProductItem(
-      {Key? key,
-      // required this.brand,
-      // required this.productName,
-      // required this.productPrice,
-      // required this.imageUrl,
-      // required this.shortDescription,
-      // required this.isFavourite,
-      // required this.id,
-      // required this.documentSnapshot,
-      required this.product,
-      this.isAdmin = false})
+  const ProductItem({Key? key, required this.product, this.isAdmin = false})
       : super(key: key);
-
-  // final String brand;
-  // final String productName;
-  // final String productPrice;
-  // final String imageUrl;
-  // final String shortDescription;
-  // final bool isFavourite;
-  // final String id;
-  // final DocumentSnapshot documentSnapshot;
 
   final Product product;
   final bool isAdmin;
@@ -167,7 +147,7 @@ class _ProductItemState extends State<ProductItem> {
                             IconButton(
                               iconSize: 18,
                               onPressed: () {
-                                cart.add(product);
+                                cart.add(product: product);
                               },
                               icon: const Icon(Icons.shopping_cart_outlined),
                             ),
