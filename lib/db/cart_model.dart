@@ -60,17 +60,6 @@ class CartModel extends ChangeNotifier {
     }
   }
 
-  // void add(Product product) {
-  //   if (!_products.contains(product)) {
-  //     product.numberOfProducts = 1;
-  //     _products.add(product);
-  //     notifyListeners();
-  //   } else {
-  //     _products[_products.indexOf(product)].numberOfProducts++;
-  //     notifyListeners();
-  //   }
-  // }
-
   void remove(Product product) {
     _products.remove(product);
     notifyListeners();

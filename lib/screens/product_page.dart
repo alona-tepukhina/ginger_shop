@@ -6,6 +6,7 @@ import 'package:ginger_shop/db/product_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/cart_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ginger_shop/ui/appbar_cart_iconbutton.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key, required this.product}) : super(key: key);
@@ -28,16 +29,20 @@ class _ProductPageState extends State<ProductPage> {
     final selectedProduct = widget.product;
 
     int tmpNumberOfProducts = cart.tmpNumberOfProducts;
-
     double tmpPrice = cart.getTmpPrice(selectedProduct);
-
     double totalPrice = widget.product.productPrice;
 
     bool isFavouriteProduct = widget.product.isFavourite;
 
     Icon favouritesIcon = (isFavouriteProduct)
-        ? const Icon(Icons.favorite)
-        : const Icon(Icons.favorite_outline_outlined);
+        ? Icon(
+            Icons.favorite,
+            key: UniqueKey(),
+          )
+        : Icon(
+            Icons.favorite_outline_outlined,
+            key: UniqueKey(),
+          );
 
     return Scaffold(
       appBar: AppBar(
@@ -49,13 +54,8 @@ class _ProductPageState extends State<ProductPage> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-            icon: kShoppingCartIcon,
-          ),
+        actions: const [
+          AppbarCartIconButton(),
         ],
       ),
       body: SafeArea(
@@ -85,8 +85,10 @@ class _ProductPageState extends State<ProductPage> {
                         child: IconButton(
                           iconSize: 18,
                           onPressed: () {
-                            editProduct(
-                                widget.product.isFavourite, widget.product.id);
+                            setState(() {
+                              editProduct(widget.product.isFavourite,
+                                  widget.product.id);
+                            });
                           },
                           icon: favouritesIcon,
                         ),
