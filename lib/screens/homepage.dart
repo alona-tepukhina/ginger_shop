@@ -16,22 +16,24 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userDao = Provider.of<UserDao>(context, listen: false);
-
+    final userDao = context.watch<UserDao>();
     bool isAdmin = userDao.isLoggedIn();
 
     return Scaffold(
-      drawer: Drawer(
+      drawer: const Drawer(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: MainMenu(isAdmin: isAdmin),
+          padding: EdgeInsets.all(8.0),
+          child: MainMenu(),
         ),
       ),
       appBar: AppBar(
         title: const Text('Products'),
         centerTitle: true,
-        actions: const [
-          AppbarCartIconButton(),
+        actions: [
+          Visibility(
+            visible: (!isAdmin),
+            child: const AppbarCartIconButton(),
+          ),
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(

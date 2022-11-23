@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text('Login Successful')));
-                                Navigator.pushNamed(context, '/admin');
+                                Navigator.pushNamed(context, '/home');
                               }
                             }
                           },
