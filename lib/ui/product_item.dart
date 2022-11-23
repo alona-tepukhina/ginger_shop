@@ -6,13 +6,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ginger_shop/db/product.dart';
 import 'package:ginger_shop/db/cart_model.dart';
 import 'package:provider/provider.dart';
+import 'package:ginger_shop/screens/edit_product.dart';
+import 'package:ginger_shop/db/user_dao.dart';
 
 class ProductItem extends StatefulWidget {
-  const ProductItem({Key? key, required this.product, this.isAdmin = false})
-      : super(key: key);
+  const ProductItem({Key? key, required this.product}) : super(key: key);
 
   final Product product;
-  final bool isAdmin;
 
   @override
   State<ProductItem> createState() => _ProductItemState();
@@ -25,6 +25,9 @@ class _ProductItemState extends State<ProductItem> {
 
     // Not sure
     final cart = context.watch<CartModel>();
+    final userDao = context.watch<UserDao>();
+
+    final bool isAdmin = userDao.isLoggedIn();
 
     return Card(
       child: Padding(
@@ -33,12 +36,19 @@ class _ProductItemState extends State<ProductItem> {
           height: 108,
           child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        ProductPage(product: product),
-                  ));
+              isAdmin
+                  ? Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            EditProduct(product: product),
+                      ))
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ProductPage(product: product),
+                      ));
             },
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,29 +102,12 @@ class _ProductItemState extends State<ProductItem> {
                           color: Colors.black87,
                         ),
                       ),
-
-                      // Align(
-                      //   alignment: Alignment.bottomLeft,
-                      //   child: Column(
-                      //     crossAxisAlignment: CrossAxisAlignment.start,
-                      //     mainAxisAlignment: MainAxisAlignment.end,
-                      //     children: <Widget>[
-                      //       Text(
-                      //         'Price: ${widget.productPrice} USD',
-                      //         style: const TextStyle(
-                      //           fontSize: 12.0,
-                      //           color: Colors.black87,
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
                 SizedBox(
                   width: 44,
-                  child: (widget.isAdmin)
+                  child: (isAdmin)
                       ? IconButton(
                           iconSize: 18,
                           onPressed: () => showDialog<String>(
@@ -155,7 +148,8 @@ class _ProductItemState extends State<ProductItem> {
                             IconButton(
                                 iconSize: 18,
                                 onPressed: () {
-                                  editProduct(product.isFavourite, product.id);
+                                  editProductFavourite(
+                                      product.isFavourite, product.id);
                                 },
                                 icon: (product.isFavourite)
                                     ? const Icon(Icons.favorite)

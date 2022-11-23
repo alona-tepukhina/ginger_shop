@@ -21,10 +21,10 @@ class HomePage extends StatelessWidget {
     bool isAdmin = userDao.isLoggedIn();
 
     return Scaffold(
-      drawer: Drawer(
+      drawer: const Drawer(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: MainMenu(isAdmin: isAdmin),
+          padding: EdgeInsets.all(8.0),
+          child: MainMenu(),
         ),
       ),
       appBar: AppBar(

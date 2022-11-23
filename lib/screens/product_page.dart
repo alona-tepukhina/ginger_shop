@@ -5,7 +5,6 @@ import 'package:ginger_shop/db/product.dart';
 import 'package:ginger_shop/db/product_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/cart_model.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ginger_shop/ui/appbar_cart_iconbutton.dart';
 
 class ProductPage extends StatefulWidget {
@@ -86,7 +85,7 @@ class _ProductPageState extends State<ProductPage> {
                           iconSize: 18,
                           onPressed: () {
                             setState(() {
-                              editProduct(widget.product.isFavourite,
+                              editProductFavourite(widget.product.isFavourite,
                                   widget.product.id);
                             });
                           },
