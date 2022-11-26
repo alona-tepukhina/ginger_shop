@@ -36,27 +36,45 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('products').snapshots(),
-        builder: (context, snapshot) {
-          return (!snapshot.hasData)
-              ? const Center(child: CircularProgressIndicator())
-              : ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (context, index) {
-                    DocumentSnapshot data = snapshot.data!.docs[index];
-                    final product = Product(
-                        brand: data['brand'],
-                        productName: data['productName'],
-                        productPrice: data['price'],
-                        imageUrl: data['imageURL'],
-                        shortDescription: data['shortDescription'],
-                        isFavourite: data['isFavourite'],
-                        id: data.id,
-                        documentSnapshot: data);
-                    return ProductItem(product: product);
-                  });
-        },
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream:
+                  FirebaseFirestore.instance.collection('products').snapshots(),
+              builder: (context, snapshot) {
+                return (!snapshot.hasData)
+                    ? const Center(child: CircularProgressIndicator())
+                    : ListView.builder(
+                        itemCount: snapshot.data?.docs.length,
+                        itemBuilder: (context, index) {
+                          DocumentSnapshot data = snapshot.data!.docs[index];
+                          final product = Product(
+                              brand: data['brand'],
+                              productName: data['productName'],
+                              productPrice: data['price'],
+                              imageUrl: data['imageURL'],
+                              shortDescription: data['shortDescription'],
+                              isFavourite: data['isFavourite'],
+                              id: data.id,
+                              documentSnapshot: data);
+                          return ProductItem(product: product);
+                        });
+              },
+            ),
+          ),
+          if (isAdmin)
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/addProduct');
+                },
+                child: const Text('Add product'),
+              ),
+            ),
+        ],
       ),
     );
   }
