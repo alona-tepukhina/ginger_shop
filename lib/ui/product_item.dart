@@ -8,6 +8,7 @@ import 'package:ginger_shop/db/cart_model.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/screens/edit_product.dart';
 import 'package:ginger_shop/db/user_dao.dart';
+import 'package:ginger_shop/ui/product_image.dart';
 
 class ProductItem extends StatefulWidget {
   const ProductItem({Key? key, required this.product}) : super(key: key);
@@ -56,16 +57,9 @@ class _ProductItemState extends State<ProductItem> {
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1.0,
-                  //child: Image.network(widget.imageUrl),
-                  child: (product.imageUrl != '')
-                      ? Image.network(
-                          product.imageUrl,
-                          errorBuilder: (BuildContext context, Object exception,
-                              StackTrace? stackTrace) {
-                            return kDefaultListImagePlaceholder;
-                          },
-                        )
-                      : kDefaultListImagePlaceholder,
+                  child: ProductImage(
+                    imageURL: product.imageUrl,
+                  ),
                 ),
                 Expanded(
                   child: Column(

@@ -24,4 +24,3 @@ final kDefaultListImagePlaceholder =
 
 //const kShoppingCartIcon = FaIcon(FontAwesomeIcons.bagShopping);
 const kShoppingCartIcon = Icon(Icons.shopping_cart_outlined);
-//icon: const Icon(Icons.shopping_cart)),

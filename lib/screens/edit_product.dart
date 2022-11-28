@@ -4,6 +4,7 @@ import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/utilities/validators.dart';
 import 'package:ginger_shop/db/product_dao.dart';
 import 'package:ginger_shop/db/product.dart';
+import 'package:ginger_shop/ui/product_image.dart';
 
 class EditProduct extends StatefulWidget {
   const EditProduct({Key? key, required this.product}) : super(key: key);
@@ -164,16 +165,10 @@ class _EditProductState extends State<EditProduct> {
                       ),
                       SizedBox(
                         height: kPreviewImageHeight,
-                        //width: 200,
-                        child: ((imageURL != null) && (imageURL != ''))
-                            ? Image.network(
-                                imageURL!,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return kDefaultListImagePlaceholder;
-                                },
-                              )
-                            : kDefaultListImagePlaceholder,
+                        width: 200,
+                        child: ProductImage(
+                          imageURL: imageURL,
+                        ),
                       ),
                     ],
                   ),
