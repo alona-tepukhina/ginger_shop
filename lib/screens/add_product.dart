@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db/user_dao.dart';
 import 'package:ginger_shop/utilities/validators.dart';
 import 'package:ginger_shop/db/product_dao.dart';
+import 'package:ginger_shop/ui/product_image.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key}) : super(key: key);
@@ -124,7 +124,7 @@ class _AddProductState extends State<AddProduct> {
                         border: UnderlineInputBorder(),
                       ),
                       validator: (String? value) {
-                        if (value != null) {
+                        if ((value != null) && (value != '')) {
                           if (!value.isValidURL()) {
                             return 'Invalid URL';
                           }
@@ -151,15 +151,9 @@ class _AddProductState extends State<AddProduct> {
                       SizedBox(
                         height: kPreviewImageHeight,
                         //width: 200,
-                        child: ((imageURL != null) && (imageURL != ''))
-                            ? Image.network(
-                                imageURL!,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return kDefaultListImagePlaceholder;
-                                },
-                              )
-                            : kDefaultListImagePlaceholder,
+                        child: ProductImage(
+                          imageURL: imageURL,
+                        ),
                       ),
                     ],
                   ),
