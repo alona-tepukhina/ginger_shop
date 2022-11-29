@@ -36,6 +36,7 @@ class CartScreen extends StatelessWidget {
                             children: [
                               SizedBox(
                                 height: 100,
+                                //height: 200,
                                 child: ProductImage(
                                   imageURL: cart.products[index].imageUrl,
                                 ),
@@ -157,21 +158,48 @@ class CartScreen extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  kSizedBoxFullHeight,
-                  const Divider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('Total price: '),
-                        Text(
-                          '$totalPrice USD',
-                          style: const TextStyle(fontWeight: FontWeight.w500),
-                        ),
-                      ],
+
+                  Card(
+                    color: Colors.lightBlueAccent,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text(
+                            'Total price: ',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            '$totalPrice USD',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
+                        ],
+                      ),
                     ),
-                  )
+                  ),
+
+                  // kSizedBoxFullHeight,
+                  // const Divider(),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(vertical: 40),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       const Text('Total price: '),
+                  //       Text(
+                  //         '$totalPrice USD',
+                  //         style: const TextStyle(fontWeight: FontWeight.w500),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
       ),
