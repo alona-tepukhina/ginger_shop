@@ -45,16 +45,35 @@ class CartScreen extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      cart.products[index].brand,
-                                    ),
-                                    Text(cart.products[index].productName),
-                                    kSizedBoxHalfHeight,
-                                    Text(
-                                      '${cart.products[index].productPrice * cart.products[index].numberOfProducts} USD',
-                                      style: const TextStyle(
-                                          color: Colors.black87,
-                                          fontWeight: FontWeight.w500),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          width: 16,
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                cart.products[index].brand,
+                                              ),
+                                              Text(cart
+                                                  .products[index].productName),
+                                              kSizedBoxHalfHeight,
+                                              Text(
+                                                '${cart.products[index].productPrice * cart.products[index].numberOfProducts} USD',
+                                                style: const TextStyle(
+                                                    color: Colors.black87,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.min,

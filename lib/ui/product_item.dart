@@ -31,7 +31,7 @@ class _ProductItemState extends State<ProductItem> {
 
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: SizedBox(
           height: 108,
           child: GestureDetector(
@@ -54,8 +54,8 @@ class _ProductItemState extends State<ProductItem> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                AspectRatio(
-                  aspectRatio: 1.0,
+                SizedBox(
+                  height: 100,
                   child: ProductImage(
                     imageURL: product.imageUrl,
                   ),
@@ -63,6 +63,7 @@ class _ProductItemState extends State<ProductItem> {
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Column(
@@ -76,13 +77,15 @@ class _ProductItemState extends State<ProductItem> {
                             ),
                             const Padding(
                                 padding: EdgeInsets.only(bottom: 2.0)),
-                            Text(
-                              product.shortDescription,
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 12.0,
-                                color: Colors.black54,
+                            Expanded(
+                              child: Text(
+                                product.shortDescription,
+                                maxLines: 4,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.black54,
+                                ),
                               ),
                             ),
                           ],
