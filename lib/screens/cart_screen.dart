@@ -14,18 +14,7 @@ class CartScreen extends StatelessWidget {
     var cart = context.watch<CartModel>();
     var totalPrice = cart.getTotalPrice();
 
-    // final selectedProduct = widget.product;
-    // int tmpNumberOfProducts = cart.tmpNumberOfProducts;
-    // double tmpPrice = cart.getTmpPrice(selectedProduct);
-    // double totalPrice = widget.product.productPrice;
-
     return Scaffold(
-      // drawer: const Drawer(
-      //   child: Padding(
-      //     padding: EdgeInsets.all(8.0),
-      //     child: MainMenu(),
-      //   ),
-      // ),
       appBar: AppBar(
         title: const Text('Cart'),
         centerTitle: true,
