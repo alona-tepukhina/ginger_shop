@@ -34,6 +34,7 @@ class ProductPage extends StatelessWidget {
         leading: BackButton(
           onPressed: () {
             cart.setDefaultTmpNumberOfProducts();
+            //tmpNumberOfProducts = 1;
             Navigator.pop(context);
           },
         ),
@@ -146,6 +147,7 @@ class ProductPage extends StatelessWidget {
                                 product: product,
                                 numberOfProducts: tmpNumberOfProducts);
                             cart.setDefaultTmpNumberOfProducts();
+                            //tmpNumberOfProducts = 1;
                           },
                           child: const Text('Add to cart'),
                         ),
