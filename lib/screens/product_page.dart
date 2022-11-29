@@ -6,46 +6,30 @@ import 'package:ginger_shop/db/product_dao.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/db/cart_model.dart';
 import 'package:ginger_shop/ui/appbar_cart_iconbutton.dart';
+import 'package:ginger_shop/ui/product_image.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends StatelessWidget {
   const ProductPage({Key? key, required this.product}) : super(key: key);
 
   final Product product;
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
-}
-
-class _ProductPageState extends State<ProductPage> {
-  @override
   Widget build(BuildContext context) {
-    // Icon favouritesIcon = (widget.product.isFavourite)
+    // Icon favouritesIcon = (product.isFavourite)
     //     ? const Icon(Icons.favorite)
     //     : const Icon(Icons.favorite_outline_outlined);
 
     final cart = context.watch<CartModel>();
 
-    final selectedProduct = widget.product;
+    final selectedProduct = product;
 
     int tmpNumberOfProducts = cart.tmpNumberOfProducts;
     double tmpPrice = cart.getTmpPrice(selectedProduct);
-    double totalPrice = widget.product.productPrice;
-
-    bool isFavouriteProduct = widget.product.isFavourite;
-
-    Icon favouritesIcon = (isFavouriteProduct)
-        ? Icon(
-            Icons.favorite,
-            key: UniqueKey(),
-          )
-        : Icon(
-            Icons.favorite_outline_outlined,
-            key: UniqueKey(),
-          );
+    double totalPrice = product.productPrice;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.product.productName),
+        title: Text(product.productName),
         centerTitle: true,
         leading: BackButton(
           onPressed: () {
@@ -68,31 +52,26 @@ class _ProductPageState extends State<ProductPage> {
                 SizedBox(
                   height: 200,
                   width: 200,
-                  child: Stack(
-                    children: [
-                      (widget.product.imageUrl != '')
-                          ? Image.network(
-                              widget.product.imageUrl,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace? stackTrace) {
-                                return kDefaultListImagePlaceholder;
-                              },
-                            )
-                          : kDefaultListImagePlaceholder,
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          iconSize: 18,
-                          onPressed: () {
-                            setState(() {
-                              editProductFavourite(widget.product.isFavourite,
-                                  widget.product.id);
-                            });
-                          },
-                          icon: favouritesIcon,
-                        ),
-                      ),
-                    ],
+                  // child: Stack(
+                  //   children: [
+                  //     ProductImage(
+                  //       imageURL: product.imageUrl,
+                  //     ),
+                  //     Align(
+                  //       alignment: Alignment.topRight,
+                  //       child: IconButton(
+                  //         iconSize: 18,
+                  //         onPressed: () {
+                  //           editProductFavourite(
+                  //               product.isFavourite, product.id);
+                  //         },
+                  //         icon: favouritesIcon,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  child: ProductImage(
+                    imageURL: product.imageUrl,
                   ),
                 ),
                 Column(
@@ -100,7 +79,7 @@ class _ProductPageState extends State<ProductPage> {
                   children: [
                     kSizedBoxFullHeight,
                     Text(
-                      widget.product.productName,
+                      product.productName,
                       style: const TextStyle(
                           fontWeight: FontWeight.w500, fontSize: 18),
                     ),
@@ -112,7 +91,7 @@ class _ProductPageState extends State<ProductPage> {
                           style: TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(
-                          widget.product.brand,
+                          product.brand,
                         ),
                       ],
                     ),
@@ -164,7 +143,7 @@ class _ProductPageState extends State<ProductPage> {
                         ElevatedButton(
                           onPressed: () {
                             cart.add(
-                                product: widget.product,
+                                product: product,
                                 numberOfProducts: tmpNumberOfProducts);
                             cart.setDefaultTmpNumberOfProducts();
                           },
@@ -181,7 +160,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                     kSizedBoxHalfHeight,
                     Text(
-                      widget.product.shortDescription,
+                      product.shortDescription,
                       style: const TextStyle(
                         //fontSize: 12.0,
                         color: Colors.black54,

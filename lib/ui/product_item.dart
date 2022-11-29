@@ -24,7 +24,6 @@ class _ProductItemState extends State<ProductItem> {
   Widget build(BuildContext context) {
     final product = widget.product;
 
-    // Not sure
     final cart = context.watch<CartModel>();
     final userDao = context.watch<UserDao>();
 
