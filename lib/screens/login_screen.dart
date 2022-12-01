@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ginger_shop/utilities/validators.dart';
 import 'package:ginger_shop/utilities/constants.dart';
 import 'package:provider/provider.dart';
-import 'package:ginger_shop/db/user_dao.dart';
+import 'package:ginger_shop/models/user_dao.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

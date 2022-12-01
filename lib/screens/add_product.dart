@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/utilities/constants.dart';
 import 'package:ginger_shop/utilities/validators.dart';
-import 'package:ginger_shop/db/product_dao.dart';
+import 'package:ginger_shop/models/product_dao.dart';
 import 'package:ginger_shop/ui/product_image.dart';
 
 class AddProduct extends StatefulWidget {

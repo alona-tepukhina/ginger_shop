@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/ui/product_item.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db/product.dart';
-import 'package:ginger_shop/db/product_dao.dart';
+import 'package:ginger_shop/models/product.dart';
+import 'package:ginger_shop/models/product_dao.dart';
 import 'package:provider/provider.dart';
-import 'package:ginger_shop/db/cart_model.dart';
+import 'package:ginger_shop/models/cart_model.dart';
 import 'package:ginger_shop/ui/appbar_cart_iconbutton.dart';
 import 'package:ginger_shop/ui/product_image.dart';
+import 'package:ginger_shop/models/product_tmp_cart_model.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({Key? key, required this.product}) : super(key: key);
@@ -20,11 +21,12 @@ class ProductPage extends StatelessWidget {
     //     : const Icon(Icons.favorite_outline_outlined);
 
     final cart = context.watch<CartModel>();
+    final tmpProduct = context.watch<ProductTmpCartModel>();
 
     final selectedProduct = product;
 
-    int tmpNumberOfProducts = cart.tmpNumberOfProducts;
-    double tmpPrice = cart.getTmpPrice(selectedProduct);
+    int tmpNumberOfProducts = tmpProduct.tmpNumberOfProducts;
+    double tmpPrice = tmpProduct.getTmpPrice(selectedProduct);
     double totalPrice = product.productPrice;
 
     return Scaffold(
@@ -33,7 +35,7 @@ class ProductPage extends StatelessWidget {
         centerTitle: true,
         leading: BackButton(
           onPressed: () {
-            cart.setDefaultTmpNumberOfProducts();
+            tmpProduct.setDefaultTmpNumberOfProducts();
             //tmpNumberOfProducts = 1;
             Navigator.pop(context);
           },
@@ -117,7 +119,7 @@ class ProductPage extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
-                                cart.decreaseTmpNumberOfProducts();
+                                tmpProduct.decreaseTmpNumberOfProducts();
                               },
                               icon: const Icon(
                                 Icons.remove_circle_outline,
@@ -128,7 +130,7 @@ class ProductPage extends StatelessWidget {
                             Text('$tmpNumberOfProducts'),
                             IconButton(
                               onPressed: () {
-                                cart.increaseTmpNumberOfProducts();
+                                tmpProduct.increaseTmpNumberOfProducts();
                               },
                               icon: const Icon(
                                 Icons.add_circle_outline,
@@ -146,7 +148,7 @@ class ProductPage extends StatelessWidget {
                             cart.add(
                                 product: product,
                                 numberOfProducts: tmpNumberOfProducts);
-                            cart.setDefaultTmpNumberOfProducts();
+                            tmpProduct.setDefaultTmpNumberOfProducts();
                             //tmpNumberOfProducts = 1;
                           },
                           child: const Text('Add to cart'),

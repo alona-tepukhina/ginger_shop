@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/ui/main_menu.dart';
-import 'package:ginger_shop/db/cart_model.dart';
+import 'package:ginger_shop/models/cart_model.dart';
 import 'package:ginger_shop/ui/cart_is_empty.dart';
 import 'package:ginger_shop/utilities/constants.dart';
 import 'package:provider/provider.dart';
@@ -160,9 +160,9 @@ class CartScreen extends StatelessWidget {
                   // ),
 
                   Card(
-                    color: Colors.lightBlueAccent,
+                    color: Colors.lightBlue[400],
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 18),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -170,14 +170,14 @@ class CartScreen extends StatelessWidget {
                             'Total price: ',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 18,
                                 fontWeight: FontWeight.w400),
                           ),
                           Text(
                             '$totalPrice USD',
                             style: const TextStyle(
                                 fontWeight: FontWeight.w500,
-                                fontSize: 20,
+                                fontSize: 18,
                                 color: Colors.black),
                           ),
                         ],

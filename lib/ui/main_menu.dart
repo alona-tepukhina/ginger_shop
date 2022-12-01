@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ginger_shop/db/user_dao.dart';
+import 'package:ginger_shop/models/user_dao.dart';
 import 'package:provider/provider.dart';
 
 class MainMenu extends StatefulWidget {

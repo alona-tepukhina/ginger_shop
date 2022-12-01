@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ginger_shop/db/cart_model.dart';
+import 'package:ginger_shop/models/cart_model.dart';
+import 'package:ginger_shop/models/product_tmp_cart_model.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/screens/homepage.dart';
-import 'package:ginger_shop/db/user_dao.dart';
+import 'package:ginger_shop/models/user_dao.dart';
 import 'package:ginger_shop/screens/login_screen.dart';
 import 'package:ginger_shop/screens/add_product.dart';
 import 'package:ginger_shop/screens/favourites_page.dart';
@@ -24,7 +25,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserDao>(create: (_) => UserDao()),
-        ChangeNotifierProvider(create: (_) => CartModel())
+        ChangeNotifierProvider<CartModel>(create: (_) => CartModel()),
+        ChangeNotifierProvider<ProductTmpCartModel>(
+            create: (_) => ProductTmpCartModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
