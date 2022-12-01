@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ginger_shop/db/cart_model.dart';
+import 'package:ginger_shop/models/cart_model.dart';
 import 'package:ginger_shop/utilities/constants.dart';
 
 class AppbarCartIconButton extends StatefulWidget {

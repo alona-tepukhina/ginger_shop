@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ginger_shop/db/product.dart';
+import 'package:ginger_shop/models/product.dart';
 
 Future<void> addProduct({
   required String brand,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ginger_shop/screens/product_page.dart';
 import 'package:ginger_shop/utilities/constants.dart';
-import 'package:ginger_shop/db/product_dao.dart';
+import 'package:ginger_shop/models/product_dao.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ginger_shop/db/product.dart';
-import 'package:ginger_shop/db/cart_model.dart';
+import 'package:ginger_shop/models/product.dart';
+import 'package:ginger_shop/models/cart_model.dart';
 import 'package:provider/provider.dart';
 import 'package:ginger_shop/screens/edit_product.dart';
-import 'package:ginger_shop/db/user_dao.dart';
+import 'package:ginger_shop/models/user_dao.dart';
 import 'package:ginger_shop/ui/product_image.dart';
 
 class ProductItem extends StatefulWidget {
